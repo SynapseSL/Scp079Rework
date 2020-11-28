@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scp079Rework", "Scp079Rework\Scp079Rework.csproj", "{BAA5A6FD-3A3C-4895-BC80-51EB34C862E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAA5A6FD-3A3C-4895-BC80-51EB34C862E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAA5A6FD-3A3C-4895-BC80-51EB34C862E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA5A6FD-3A3C-4895-BC80-51EB34C862E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAA5A6FD-3A3C-4895-BC80-51EB34C862E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A29708C9-3BF9-4BB6-9C99-D17316180EE0}
+	EndGlobalSection
+EndGlobal
