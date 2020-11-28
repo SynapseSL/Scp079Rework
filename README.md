@@ -2,7 +2,7 @@
 Scp079Rework is a plugin that adds many commands for Scp079 and allows other developer to create addons for this Plugin.
 
 ## Commands
-Scp079 can use a command with .079 {commandname}
+Scp079 can use a command with .079 {command name}
 
 | Name | Description |
 |:--: | :--: |
