@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ScanCommand.cs" />
     <Compile Include="Commands\DeathCommand.cs" />
     <Compile Include="Commands\ScpCommand.cs" />
     <Compile Include="EventHandlers.cs" />
