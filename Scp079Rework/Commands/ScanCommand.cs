@@ -33,23 +33,23 @@ namespace Scp079Rework.Commands
                 switch (player.Room.Zone)
                 {
                     case ZoneType.LCZ:
-                        lcz += $"\n    - {context.Player} : {context.Player.RoleType}";
+                        lcz += $"\n    - {player} : {player.RoleType}";
                         break;
 
                     case ZoneType.HCZ:
-                        hcz += $"\n    - {context.Player} : {context.Player.RoleType}";
+                        hcz += $"\n    - {player} : {player.RoleType}";
                         break;
 
                     case ZoneType.Entrance:
-                        ez += $"\n    - {context.Player} : {context.Player.RoleType}";
+                        ez += $"\n    - {player} : {player.RoleType}";
                         break;
 
                     case ZoneType.Surface:
-                        surface += $"\n    - {context.Player} : {context.Player.RoleType}";
+                        surface += $"\n    - {player} : {player.RoleType}";
                         break;
 
                     case ZoneType.Pocket:
-                        pocket += $"\n    - {context.Player} : {context.Player.RoleType}";
+                        pocket += $"\n    - {player} : {player.RoleType}";
                         break;
                 }
             }
