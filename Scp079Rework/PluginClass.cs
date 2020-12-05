@@ -13,7 +13,7 @@ namespace Scp079Rework
         SynapseMajor = 2,
         SynapseMinor = 2,
         SynapsePatch = 0,
-        Version = "v.1.0.0"
+        Version = "v.1.1.0"
         )]
     public class PluginClass : AbstractPlugin
     {
