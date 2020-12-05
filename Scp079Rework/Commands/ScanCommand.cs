@@ -7,7 +7,7 @@ namespace Scp079Rework.Commands
 {
     public class ScanCommand : I079Command
     {
-        public KeyCode Key => KeyCode.Alpha4;
+        public KeyCode Key => KeyCode.None;
 
         public int RequiredLevel => 3;
 
@@ -21,7 +21,7 @@ namespace Scp079Rework.Commands
 
         public CommandResult Execute(CommandContext context)
         {
-            var layout = "\nCurrently living creatures in\n  LCZ:\n[LCZ]\n  HCZ:\n[HCZ]\n  EZ:\n[EZ]\n  Surface:\n[SURFACE]\n  Pocket:\n[POCKET]";
+            var layout = "\nCurrently living creatures in\n  LCZ:[LCZ]\n  HCZ:[HCZ]\n  EZ:[EZ]\n  Surface:[SURFACE]\n  Pocket:[POCKET]";
 
             var lcz = "";
             var hcz = "";
@@ -33,23 +33,23 @@ namespace Scp079Rework.Commands
                 switch (player.Room.Zone)
                 {
                     case ZoneType.LCZ:
-                        lcz += $"    - {context.Player} : {context.Player.RoleType}";
+                        lcz += $"\n    - {context.Player} : {context.Player.RoleType}";
                         break;
 
                     case ZoneType.HCZ:
-                        hcz += $"    - {context.Player} : {context.Player.RoleType}";
+                        hcz += $"\n    - {context.Player} : {context.Player.RoleType}";
                         break;
 
                     case ZoneType.Entrance:
-                        ez += $"    - {context.Player} : {context.Player.RoleType}";
+                        ez += $"\n    - {context.Player} : {context.Player.RoleType}";
                         break;
 
                     case ZoneType.Surface:
-                        surface += $"    - {context.Player} : {context.Player.RoleType}";
+                        surface += $"\n    - {context.Player} : {context.Player.RoleType}";
                         break;
 
                     case ZoneType.Pocket:
-                        pocket += $"    - {context.Player} : {context.Player.RoleType}";
+                        pocket += $"\n    - {context.Player} : {context.Player.RoleType}";
                         break;
                 }
             }
