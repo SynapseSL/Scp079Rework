@@ -60,14 +60,14 @@ namespace Scp079Rework
             }
 
             Player.Bypass = _bypass;
-            if (Map.Get.HeavyController.ActiveGenerators >= 5) return;
-
+            if (Map.Get.HeavyController.Is079Recontained) return;
 
             var locked = SynapseController.Server.Map.Round.RoundLock;
             SynapseController.Server.Map.Round.RoundLock = true;
             Timing.CallDelayed(0.1f, () =>
              {
-                 Player.RoleID = (int)RoleType.Scp079;
+                 if (Player.RoleID == (int)RoleType.Spectator)
+                     Player.RoleID = (int)RoleType.Scp079;
                  SynapseController.Server.Map.Round.RoundLock = locked;
                  NineTailedFoxAnnouncer.CheckForZombies(SynapseController.Server.Host.gameObject);
              });
