@@ -12,6 +12,7 @@ Scp079 can use a command with .079 {command name}
 | mtf | Sends a fake mtf spawn Announcement |
 | scp | changes your current camera to a one near an other Scp |
 | robot | Allows Scp079 to change his Role to a robot |
+| scan | Gives a List of all Players with they Role and in which Zone they are |
 
 ## Role Information
 ```
