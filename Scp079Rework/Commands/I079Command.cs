@@ -14,6 +14,8 @@
 
         string Description { get; }
 
+        float Cooldown { get; }
+
         Synapse.Command.CommandResult Execute(Synapse.Command.CommandContext context);
     }
 }

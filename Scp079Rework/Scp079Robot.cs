@@ -25,10 +25,6 @@ namespace Scp079Rework
 
         internal bool _bypass = false;
 
-        private static bool alreadySpawned = false;
-
-        internal static List<Synapse.Api.Items.SynapseItem> Inventory = new List<Synapse.Api.Items.SynapseItem>();
-
         public override void Spawn()
         {
             Player.Position = PluginClass.Config.RobotSpawn.Parse().Position;
@@ -36,15 +32,8 @@ namespace Scp079Rework
             Player.MaxHealth = PluginClass.Config.Health;
             Player.Health = PluginClass.Config.Health;
             Player.Inventory.Clear();
-
-            if (!alreadySpawned)
-                foreach (var item in PluginClass.Config.Inventory)
-                    Player.Inventory.AddItem(item.Parse());
-            else
-                foreach (var item in Inventory)
-                    Player.Inventory.AddItem(item);
-
-            alreadySpawned = true;
+            foreach (var item in PluginClass.Config.Inventory)
+                Player.Inventory.AddItem(item.Parse());
 
             _bypass = Player.Bypass;
             Player.Bypass = true;
@@ -52,13 +41,6 @@ namespace Scp079Rework
 
         public override void DeSpawn()
         {
-            Inventory.Clear();
-            foreach(var item in Player.Inventory.Items)
-            {
-                Inventory.Add(item);
-                item.Despawn();
-            }
-
             Player.Bypass = _bypass;
             if (Map.Get.HeavyController.Is079Recontained) return;
 
@@ -67,9 +49,11 @@ namespace Scp079Rework
             Timing.CallDelayed(0.1f, () =>
              {
                  if (Player.RoleID == (int)RoleType.Spectator)
+                 {
                      Player.RoleID = (int)RoleType.Scp079;
+                     NineTailedFoxAnnouncer.CheckForZombies(SynapseController.Server.Host.gameObject);
+                 }
                  SynapseController.Server.Map.Round.RoundLock = locked;
-                 NineTailedFoxAnnouncer.CheckForZombies(SynapseController.Server.Host.gameObject);
              });
         }
 

@@ -1,4 +1,6 @@
 ﻿using Event = Synapse.Api.Events.EventHandler;
+using UnityEngine;
+using System.Linq;
 
 namespace Scp079Rework
 {
@@ -34,6 +36,11 @@ namespace Scp079Rework
         {
             if((ev.Player.RoleID == (int)RoleType.Scp079 || ev.Player.RoleID == 79) && Commands.CommandHandler.Handler.GetCommand(ev.KeyCode,out var cmd))
             {
+                if (Scp079SynapseCommand.cooldown.TryGetValue(cmd.Name, out var time) && Time.time < time)
+                {
+                    ev.Player.SendConsoleMessage($"You have to wait {System.Math.Round(time - Time.time)} more seoncds until you can execute this command again");
+                    return;
+                }
                 if (cmd.RequiredLevel > ev.Player.Scp079Controller.Level && !ev.Player.Bypass)
                 {
                     ev.Player.SendConsoleMessage($"You`re level are to low! You need at least level {cmd.RequiredLevel}");
@@ -58,6 +65,9 @@ namespace Scp079Rework
                         ev.Player.Scp079Controller.Energy -= cmd.Energy;
 
                     ev.Player.Scp079Controller.GiveExperience(cmd.Exp);
+                    if (Scp079SynapseCommand.cooldown.Keys.Any(x => x == cmd.Name))
+                        Scp079SynapseCommand.cooldown.Remove(cmd.Name);
+                    Scp079SynapseCommand.cooldown.Add(cmd.Name, Time.time + cmd.Cooldown);
                 }
 
                 ev.Player.SendConsoleMessage(result.Message, "gray");

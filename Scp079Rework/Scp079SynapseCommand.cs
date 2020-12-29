@@ -1,6 +1,8 @@
 ﻿using Synapse.Command;
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
 using CommandHandler = Scp079Rework.Commands.CommandHandler;
 
 namespace Scp079Rework
@@ -9,12 +11,14 @@ namespace Scp079Rework
         Name = "079",
         Aliases = new[] { "scp079"},
         Description = "A Command for Scp079 to do much stuff",
-        Permission = "none",
+        Permission = "",
         Platforms = new[] {Platform.ClientConsole},
         Usage = "Use .079 for an Help"
         )]
     public class Scp079SynapseCommand : ISynapseCommand
     {
+        internal static readonly Dictionary<string, float> cooldown = new Dictionary<string, float>();
+
         public CommandResult Execute(CommandContext context)
         {
             var result = new CommandResult();
@@ -39,6 +43,12 @@ namespace Scp079Rework
             {
                 try
                 {
+                    if(cooldown.TryGetValue(cmd.Name,out var time) && Time.time < time)
+                    {
+                        result.Message = $"You have to wait {Math.Round(time - Time.time)} more seoncds until you can execute this command again";
+                        result.State = CommandResultState.NoPermission;
+                        return result;
+                    }
                     if (cmd.RequiredLevel > context.Player.Scp079Controller.Level && !GetBypass(context.Player))
                     {
                         result.Message = $"You`re level are to low! You need at least level {cmd.RequiredLevel}";
@@ -66,6 +76,9 @@ namespace Scp079Rework
                             context.Player.Scp079Controller.Energy -= cmd.Energy;
 
                         context.Player.Scp079Controller.GiveExperience(cmd.Exp);
+                        if (cooldown.Keys.Any(x => x == cmd.Name))
+                            cooldown.Remove(cmd.Name);
+                        cooldown.Add(cmd.Name, Time.time + cmd.Cooldown);
                     }
 
                     return result;

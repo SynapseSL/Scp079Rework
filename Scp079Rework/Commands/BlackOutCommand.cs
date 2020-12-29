@@ -18,6 +18,8 @@ namespace Scp079Rework.Commands
 
         public float Exp => 15f;
 
+        public float Cooldown => 10f;
+
         public CommandResult Execute(CommandContext context)
         {
             if (context.Player.RoleID == 79)

@@ -17,6 +17,8 @@ namespace Scp079Rework.Commands
 
         public float Exp => 5f;
 
+        public float Cooldown => 15f;
+
         public CommandResult Execute(CommandContext context)
         {
             string letter;

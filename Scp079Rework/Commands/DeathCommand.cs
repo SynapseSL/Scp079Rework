@@ -19,6 +19,8 @@ namespace Scp079Rework.Commands
 
         public string Description => "sends a fake scp death announcement";
 
+        public float Cooldown => 20f;
+
         public CommandResult Execute(CommandContext context)
         {
             if (context.Arguments.Count == 0 || string.IsNullOrWhiteSpace(context.Arguments.First()))

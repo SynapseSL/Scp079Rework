@@ -19,6 +19,8 @@ namespace Scp079Rework.Commands
 
         public string Description => "brings you near a other Scp";
 
+        public float Cooldown => 0f;
+
         public CommandResult Execute(CommandContext context)
         {
             if (context.Player.RoleID == 79)

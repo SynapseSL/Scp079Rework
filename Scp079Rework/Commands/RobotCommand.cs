@@ -18,6 +18,8 @@ namespace Scp079Rework.Commands
 
         public float Exp => 10f;
 
+        public float Cooldown => 0f;
+
         public CommandResult Execute(CommandContext context)
         {
             var result = new CommandResult();

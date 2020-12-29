@@ -19,6 +19,8 @@ namespace Scp079Rework.Commands
 
         public string Description => "Shows you where youre Targets are";
 
+        public float Cooldown => 0f;
+
         public CommandResult Execute(CommandContext context)
         {
             var layout = "\nCurrently living creatures in\n  LCZ:[LCZ]\n  HCZ:[HCZ]\n  EZ:[EZ]\n  Surface:[SURFACE]\n  Pocket:[POCKET]";
