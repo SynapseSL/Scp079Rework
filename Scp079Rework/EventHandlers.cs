@@ -29,7 +29,7 @@ namespace Scp079Rework
             if(ev.Victim.RoleID == 79)
                 ev.Killer.SendBroadcast(3,"<i>You have killed <color=red>Scp079-Robot");
             if (ev.Killer.RoleID == 79)
-                ev.Victim.OpenReportWindow("<i><color=red>Scp079-robot</color> killed you");
+                ev.Victim.OpenReportWindow("<i><color=red>Scp079-robot</color> killed you</i>");
         }
 
         private void OnKeyPress(Synapse.Api.Events.SynapseEventArguments.PlayerKeyPressEventArgs ev)
