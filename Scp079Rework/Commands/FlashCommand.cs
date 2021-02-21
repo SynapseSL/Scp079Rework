@@ -24,7 +24,7 @@ namespace Scp079Rework.Commands
             if (context.Player.RoleID == 79)
                 return new CommandResult
                 {
-                    Message = "As Scp079-robot you can't use this Command",
+                    Message = PluginClass.Translation.ActiveTranslation.NotAsRobot,
                     State = CommandResultState.Error
                 };
 

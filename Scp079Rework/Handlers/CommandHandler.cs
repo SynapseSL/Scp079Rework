@@ -38,7 +38,7 @@ namespace Scp079Rework.Handlers
                 }
                 catch(Exception e)
                 {
-                    Synapse.Api.Logger.Get.Error($"Registering Scp-079 Command for type {commandclass.Name} faile:\n\n {e}");
+                    Synapse.Api.Logger.Get.Error($"Registering Scp-079 Command for type {commandclass.Name} failed:\n\n {e}");
                 }
         }
     }

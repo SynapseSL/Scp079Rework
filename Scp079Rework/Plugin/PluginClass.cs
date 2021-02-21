@@ -15,7 +15,7 @@ namespace Scp079Rework
         SynapseMajor = 2,
         SynapseMinor = 2,
         SynapsePatch = 0,
-        Version = "v.2.0.0"
+        Version = "v.2.1.0"
         )]
     public class PluginClass : AbstractPlugin
     {
@@ -38,7 +38,8 @@ namespace Scp079Rework
                 LowLevel = "Dein Level ist nich hoch genug!Du brauchst mindestens Level %level%.",
                 LowEnergy = "Du braucht mindestens %energy% Energie um diesen Befehl auszuführen.",
                 Error = "Ein Fehler ist aufgetreten während dem Ausführen des Befehls.",
-                NoCommand = "Kein solcher Unter befehl mit dem namen %command% wurde gefunden."
+                NoCommand = "Kein solcher Unter befehl mit dem namen %command% wurde gefunden.",
+                NotAsRobot = "Als SCP-079-Roboter kannst du diesen Befehl nicht ausführen"
             }, "GERMAN");
 
             CommandHandler.Handler.RegisterCommands(Assembly.GetExecutingAssembly());

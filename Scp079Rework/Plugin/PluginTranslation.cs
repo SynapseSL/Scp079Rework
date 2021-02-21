@@ -18,6 +18,6 @@ namespace Scp079Rework
 
         public string NoCommand { get; set; } = "No Scp-079 Command was found for %command%";
 
-        public string NotAsRobot { get; set; } = "As Scp079-robot you can't use this Command";
+        public string NotAsRobot { get; set; } = "As SCP-079-robot you can't use this Command";
     }
 }
