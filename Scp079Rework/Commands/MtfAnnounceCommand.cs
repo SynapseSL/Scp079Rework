@@ -5,9 +5,9 @@ namespace Scp079Rework.Commands
 {
     public class MtfAnnounceCommand : I079Command
     {
-        public int RequiredLevel => 2;
+        public int RequiredLevel => PluginExtensions.GetRequiredLevel(Name, 2);
 
-        public float Energy => 50;
+        public float Energy => PluginExtensions.GetEnergy(Name, 50f);
 
         public string Name => "mtf";
 
@@ -15,9 +15,9 @@ namespace Scp079Rework.Commands
 
         public KeyCode Key => KeyCode.Alpha2;
 
-        public float Exp => 5f;
+        public float Exp => PluginExtensions.GetExp(Name, 1f);
 
-        public float Cooldown => 15f;
+        public float Cooldown => PluginExtensions.GetCooldown(Name, 120f);
 
         public CommandResult Execute(CommandContext context)
         {

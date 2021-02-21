@@ -17,11 +17,12 @@ namespace Scp079Rework
 
         public override string GetRoleName() => "Scp079Robot";
 
-        public override Team GetTeam() => Team.SCP;
+        public override int GetTeamID() => (int)Team.SCP;
 
-        public override List<Team> GetFriends() => PluginClass.Config.RobotFF ? new List<Team> { } : new List<Team> { Team.SCP };
+        public override List<int> GetFriendsID() => PluginClass.Config.RobotFF ? new List<int> { } : new List<int> { (int)Team.SCP };
 
-        public override List<Team> GetEnemys() => new List<Team> { Team.RSC, Team.CDP, Team.MTF };
+
+        public override List<int> GetEnemiesID() => new List<int> { (int)Team.RSC, (int)Team.CDP, (int)Team.MTF };
 
         internal bool _bypass = false;
 

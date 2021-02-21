@@ -9,17 +9,17 @@ namespace Scp079Rework.Commands
     {
         public KeyCode Key => KeyCode.None;
 
-        public int RequiredLevel => 3;
+        public int RequiredLevel => PluginExtensions.GetRequiredLevel(Name, 3);
 
-        public float Energy => 100f;
+        public float Energy => PluginExtensions.GetEnergy(Name, 100f);
 
-        public float Exp => 20;
+        public float Exp => PluginExtensions.GetExp(Name, 20f);
 
         public string Name => "death";
 
         public string Description => "sends a fake scp death announcement";
 
-        public float Cooldown => 20f;
+        public float Cooldown => PluginExtensions.GetCooldown(Name, 20f);
 
         public CommandResult Execute(CommandContext context)
         {

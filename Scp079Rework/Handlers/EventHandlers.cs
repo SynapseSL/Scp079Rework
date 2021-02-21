@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Linq;
 
-namespace Scp079Rework
+namespace Scp079Rework.Handlers
 {
     public class EventHandlers
     {
@@ -34,7 +34,7 @@ namespace Scp079Rework
 
         private void OnKeyPress(Synapse.Api.Events.SynapseEventArguments.PlayerKeyPressEventArgs ev)
         {
-            if((ev.Player.RoleID == (int)RoleType.Scp079 || ev.Player.RoleID == 79) && Commands.CommandHandler.Handler.GetCommand(ev.KeyCode,out var cmd))
+            if((ev.Player.RoleID == (int)RoleType.Scp079 || ev.Player.RoleID == 79) && CommandHandler.Handler.GetCommand(ev.KeyCode,out var cmd))
             {
                 if (Scp079SynapseCommand.cooldown.TryGetValue(cmd.Name, out var time) && Time.time < time)
                 {

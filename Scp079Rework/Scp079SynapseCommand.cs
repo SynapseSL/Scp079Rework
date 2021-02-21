@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using CommandHandler = Scp079Rework.Commands.CommandHandler;
+using CommandHandler = Scp079Rework.Handlers.CommandHandler;
 
 namespace Scp079Rework
 {
@@ -25,15 +25,15 @@ namespace Scp079Rework
 
             if(context.Player.RoleID != 79 && context.Player.RoleID != (int)RoleType.Scp079)
             {
-                result.Message = "You are not Scp079";
+                result.Message = PluginClass.Translation.ActiveTranslation.Not079;
                 result.State = CommandResultState.NoPermission;
                 return result;
             }
 
             if(context.Arguments.Count < 1 || string.IsNullOrWhiteSpace(context.Arguments.At(0)))
             {
-                result.Message = "All Scp-079 commands that you can execute:";
-                foreach (var command in Commands.CommandHandler.Handler.commands)
+                result.Message = PluginClass.Translation.ActiveTranslation.Help;
+                foreach (var command in CommandHandler.Handler.commands)
                     result.Message += $"\n.079 {command.Name}\n    Description: {command.Description}\n    KeyCode:{command.Key}";
                 result.State = CommandResultState.Ok;
                 return result;
@@ -45,19 +45,19 @@ namespace Scp079Rework
                 {
                     if(cooldown.TryGetValue(cmd.Name,out var time) && Time.time < time)
                     {
-                        result.Message = $"You have to wait {Math.Round(time - Time.time)} more seoncds until you can execute this command again";
+                        result.Message = PluginClass.Translation.ActiveTranslation.Cooldown.Replace("%seconds%", Math.Round(time - Time.time).ToString());
                         result.State = CommandResultState.NoPermission;
                         return result;
                     }
                     if (cmd.RequiredLevel > context.Player.Scp079Controller.Level && !GetBypass(context.Player))
                     {
-                        result.Message = $"You`re level are to low! You need at least level {cmd.RequiredLevel}";
+                        result.Message = PluginClass.Translation.ActiveTranslation.LowLevel.Replace("%level%", cmd.RequiredLevel.ToString());
                         result.State = CommandResultState.NoPermission;
                         return result;
                     }
                     if (cmd.Energy > context.Player.Scp079Controller.Energy && !GetBypass(context.Player))
                     {
-                        result.Message = $"You need at least {cmd.Energy} Energy for executing this Command";
+                        result.Message = PluginClass.Translation.ActiveTranslation.LowEnergy.Replace("%energy%", cmd.Energy.ToString());
                         result.State = CommandResultState.NoPermission;
                         return result;
                     }
@@ -86,12 +86,12 @@ namespace Scp079Rework
                 catch(Exception e)
                 {
                     Synapse.Api.Logger.Get.Error("Command executing failed: " + e.ToString());
-                    result.Message = "Error while Executing this Command";
+                    result.Message = PluginClass.Translation.ActiveTranslation.Error;
                     result.State = CommandResultState.Error;
                     return result;
                 }
             }
-            result.Message = $"No Scp-079 Command was found for {context.Arguments.At(0)}";
+            result.Message = PluginClass.Translation.ActiveTranslation.NoCommand.Replace("%command%", context.Arguments.At(0));
             result.State = CommandResultState.Error;
             return result;
         }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System;
 
-namespace Scp079Rework.Commands
+namespace Scp079Rework.Handlers
 {
     public class CommandHandler
     {

@@ -7,17 +7,17 @@ namespace Scp079Rework.Commands
     {
         public KeyCode Key => KeyCode.Alpha3;
 
-        public int RequiredLevel => 1;
+        public int RequiredLevel => PluginExtensions.GetRequiredLevel(Name, 1);
 
-        public float Energy => 50f;
+        public float Energy => PluginExtensions.GetEnergy(Name, 50f);
 
         public string Name => "flash";
 
         public string Description => "Throws a flash at your camera";
 
-        public float Exp => 5f;
+        public float Exp => PluginExtensions.GetExp(Name, 5f);
 
-        public float Cooldown => 2f;
+        public float Cooldown => PluginExtensions.GetCooldown(Name, 2f);
 
         public CommandResult Execute(CommandContext context)
         {

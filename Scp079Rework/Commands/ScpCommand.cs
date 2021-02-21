@@ -9,17 +9,17 @@ namespace Scp079Rework.Commands
     {
         public KeyCode Key => KeyCode.Alpha4;
 
-        public int RequiredLevel => 2;
+        public int RequiredLevel => PluginExtensions.GetRequiredLevel(Name, 2);
 
-        public float Energy => 50f;
+        public float Energy => PluginExtensions.GetEnergy(Name, 50f);
 
-        public float Exp => 1f;
+        public float Exp => PluginExtensions.GetExp(Name, 1f);
 
         public string Name => "scp";
 
         public string Description => "brings you near a other Scp";
 
-        public float Cooldown => 0f;
+        public float Cooldown => PluginExtensions.GetCooldown(Name, 0f);
 
         public CommandResult Execute(CommandContext context)
         {

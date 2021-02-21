@@ -36,5 +36,27 @@ namespace Scp079Rework
 
         [Description("The Amount of MTF Robots Scp-079 can use")]
         public int Scp079MRobot = 1;
+
+        [Description("Here can you setup the configuration of the existing Commands. You cant create Commands with this")]
+        public List<CommandConfiguration> CommandConfigurations = new List<CommandConfiguration>
+        {
+            new CommandConfiguration
+            {
+                Name = "ExampleThatYouCanDelete",
+                Cooldown = 30,
+                Energy = 50,
+                Exp = 5,
+                RequiredLevel = 2
+            }
+        };
+    }
+
+    public class CommandConfiguration
+    {
+        public string Name { get; set; }
+        public int RequiredLevel { get; set; }
+        public float Energy { get; set; }
+        public float Exp { get; set; }
+        public float Cooldown { get; set; }
     }
 }

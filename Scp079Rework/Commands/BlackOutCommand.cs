@@ -6,9 +6,9 @@ namespace Scp079Rework.Commands
 {
     public class BlackOutCommand : I079Command
     {
-        public int RequiredLevel => 3;
+        public int RequiredLevel => PluginExtensions.GetRequiredLevel(Name, 3);
 
-        public float Energy => 125f;
+        public float Energy => PluginExtensions.GetEnergy(Name, 125f);
 
         public string Name => "blackout";
 
@@ -16,9 +16,9 @@ namespace Scp079Rework.Commands
 
         public KeyCode Key => KeyCode.Alpha1;
 
-        public float Exp => 15f;
+        public float Exp => PluginExtensions.GetExp(Name, 15f);
 
-        public float Cooldown => 10f;
+        public float Cooldown => PluginExtensions.GetCooldown(Name, 20f);
 
         public CommandResult Execute(CommandContext context)
         {
@@ -29,7 +29,7 @@ namespace Scp079Rework.Commands
                     State = CommandResultState.Error
                 };
 
-            Generator079.mainGenerator.ServerOvercharge(10f, false);
+            Map.Get.HeavyController.LightsOut(10f, false);
             Map.Get.GlitchedCassie("Black out through Scp 0 7 9 Now");
 
             return new CommandResult

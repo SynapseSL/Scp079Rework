@@ -9,17 +9,17 @@ namespace Scp079Rework.Commands
     {
         public KeyCode Key => KeyCode.None;
 
-        public int RequiredLevel => 3;
+        public int RequiredLevel => PluginExtensions.GetRequiredLevel(Name, 3);
 
-        public float Energy => 100f;
+        public float Energy => PluginExtensions.GetEnergy(Name, 100f);
 
-        public float Exp => 5f;
+        public float Exp => PluginExtensions.GetExp(Name, 5f);
 
         public string Name => "scan";
 
         public string Description => "Shows you where youre Targets are";
 
-        public float Cooldown => 0f;
+        public float Cooldown => PluginExtensions.GetCooldown(Name, 0f);
 
         public CommandResult Execute(CommandContext context)
         {
@@ -32,7 +32,9 @@ namespace Scp079Rework.Commands
             var pocket = "";
             foreach(var player in Server.Get.Players)
             {
-                switch (player.Room.Zone)
+                if (player.RoleType == RoleType.Spectator || player.RoleType == RoleType.None || player.RoleID == (int)RoleType.Tutorial) continue;
+
+                switch (player.Room?.Zone)
                 {
                     case ZoneType.LCZ:
                         lcz += $"\n    - {player} : {player.RoleName}";

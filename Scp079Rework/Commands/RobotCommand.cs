@@ -6,9 +6,9 @@ namespace Scp079Rework.Commands
 {
     public class RobotCommand : I079Command
     {
-        public int RequiredLevel => 3;
+        public int RequiredLevel => PluginExtensions.GetRequiredLevel(Name, 3);
 
-        public float Energy => 100f;
+        public float Energy => PluginExtensions.GetEnergy(Name, 100f);
 
         public string Name => "robot";
 
@@ -16,9 +16,9 @@ namespace Scp079Rework.Commands
 
         public KeyCode Key => KeyCode.None;
 
-        public float Exp => 10f;
+        public float Exp => PluginExtensions.GetExp(Name, 1f);
 
-        public float Cooldown => 0f;
+        public float Cooldown => PluginExtensions.GetCooldown(Name, 0f);
 
         public CommandResult Execute(CommandContext context)
         {
