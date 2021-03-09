@@ -13,8 +13,8 @@ namespace Scp079Rework
         Description = "A Plugin which gives Scp-079 a lot of new Features",
         LoadPriority = 10,
         SynapseMajor = 2,
-        SynapseMinor = 2,
-        SynapsePatch = 0,
+        SynapseMinor = 5,
+        SynapsePatch = 3,
         Version = "v.2.1.0"
         )]
     public class PluginClass : AbstractPlugin

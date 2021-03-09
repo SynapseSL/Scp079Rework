@@ -1,6 +1,7 @@
 ﻿using Event = Synapse.Api.Events.EventHandler;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace Scp079Rework.Handlers
 {
@@ -27,28 +28,28 @@ namespace Scp079Rework.Handlers
             if (ev.Killer == null || ev.Killer == ev.Victim) return;
 
             if(ev.Victim.RoleID == 79)
-                ev.Killer.SendBroadcast(3,"<i>You have killed <color=red>Scp079-Robot");
+                ev.Killer.SendBroadcast(3,PluginClass.Translation.ActiveTranslation.Killed079);
             if (ev.Killer.RoleID == 79)
-                ev.Victim.OpenReportWindow("<i><color=red>Scp079-robot</color> killed you</i>\nPress esc to Close this");
+                ev.Victim.OpenReportWindow(PluginClass.Translation.ActiveTranslation.KilledBy079.Replace("\\n", "\n"));
         }
 
         private void OnKeyPress(Synapse.Api.Events.SynapseEventArguments.PlayerKeyPressEventArgs ev)
         {
-            if((ev.Player.RoleID == (int)RoleType.Scp079 || ev.Player.RoleID == 79) && CommandHandler.Handler.GetCommand(ev.KeyCode,out var cmd))
+            if ((ev.Player.RoleID == (int)RoleType.Scp079 || ev.Player.RoleID == 79) && CommandHandler.Handler.GetCommand(ev.KeyCode, out var cmd)) 
             {
                 if (Scp079SynapseCommand.cooldown.TryGetValue(cmd.Name, out var time) && Time.time < time)
                 {
-                    ev.Player.SendConsoleMessage($"You have to wait {System.Math.Round(time - Time.time)} more seoncds until you can execute this command again");
+                    ev.Player.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.Cooldown.Replace("%seconds%", Math.Round(time - Time.time).ToString()));
                     return;
                 }
                 if (cmd.RequiredLevel > ev.Player.Scp079Controller.Level && !ev.Player.Bypass)
                 {
-                    ev.Player.SendConsoleMessage($"You`re level are to low! You need at least level {cmd.RequiredLevel}");
+                    ev.Player.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.LowLevel.Replace("%level%", cmd.RequiredLevel.ToString()));
                     return;
                 }
                 if (cmd.Energy > ev.Player.Scp079Controller.Energy && !ev.Player.Bypass)
                 {
-                    ev.Player.SendConsoleMessage($"You need at least {cmd.Energy} Energy for executing this Command");
+                    ev.Player.SendConsoleMessage(PluginClass.Translation.ActiveTranslation.LowEnergy.Replace("%energy%", cmd.Energy.ToString()));
                     return;
                 }
 

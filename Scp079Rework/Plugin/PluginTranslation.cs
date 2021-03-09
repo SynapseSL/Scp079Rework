@@ -19,5 +19,9 @@ namespace Scp079Rework
         public string NoCommand { get; set; } = "No Scp-079 Command was found for %command%";
 
         public string NotAsRobot { get; set; } = "As SCP-079-robot you can't use this Command";
+
+        public string Killed079 { get; set; } = "<i>You have killed <color=red>Scp079-Robot</color></i>";
+
+        public string KilledBy079 { get; set; } = "<i><color=red>Scp079-robot</color> killed you</i>\\nPress esc to Close this";
     }
 }
