@@ -29,7 +29,8 @@ namespace Scp079Rework.Commands
                     State = CommandResultState.Error
                 };
 
-            Map.Get.HeavyController.LightsOut(10f, false);
+            HeavyController.Get.LightsOut(10f, false);
+
             Map.Get.GlitchedCassie("Black out through Scp 0 7 9 Now");
 
             return new CommandResult

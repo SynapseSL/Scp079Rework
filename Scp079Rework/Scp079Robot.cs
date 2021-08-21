@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using MEC;
 using Synapse.Api;
-using System.Linq;
 
 namespace Scp079Rework
 {
@@ -20,7 +19,6 @@ namespace Scp079Rework
         public override int GetTeamID() => (int)Team.SCP;
 
         public override List<int> GetFriendsID() => PluginClass.Config.RobotFF ? new List<int> { } : new List<int> { (int)Team.SCP };
-
 
         public override List<int> GetEnemiesID() => new List<int> { (int)Team.RSC, (int)Team.CDP, (int)Team.MTF };
 
@@ -45,17 +43,7 @@ namespace Scp079Rework
             Player.Bypass = _bypass;
             if (Map.Get.HeavyController.Is079Recontained) return;
 
-            var locked = SynapseController.Server.Map.Round.RoundLock;
-            SynapseController.Server.Map.Round.RoundLock = true;
-            Timing.CallDelayed(0.1f, () =>
-             {
-                 if (Player.RoleID == (int)RoleType.Spectator)
-                 {
-                     Player.RoleID = (int)RoleType.Scp079;
-                     NineTailedFoxAnnouncer.CheckForZombies(SynapseController.Server.Host.gameObject);
-                 }
-                 SynapseController.Server.Map.Round.RoundLock = locked;
-             });
+            Player.RoleID = (int)RoleType.Scp079;
         }
 
         public static int Scp079DRobot = 1;

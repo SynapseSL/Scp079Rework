@@ -1,6 +1,5 @@
-﻿using Synapse.Command;
-using Synapse;
-using System.Collections.Generic;
+﻿using Synapse.Api;
+using Synapse.Command;
 using UnityEngine;
 
 namespace Scp079Rework.Commands
@@ -30,7 +29,7 @@ namespace Scp079Rework.Commands
                     State = CommandResultState.Error
                 };
 
-            var cams = GetCameras();
+            var cams = Map.Get.Cameras;
             if(cams.Count > 0)
             {
                 var cam = cams[UnityEngine.Random.Range(0, cams.Count)];
@@ -49,19 +48,6 @@ namespace Scp079Rework.Commands
                     State = CommandResultState.Error
                 };
             }
-        }
-
-        private List<Camera079> GetCameras()
-        {
-            var list = Server.Get.GetObjectsOf<Camera079>();
-            var cams = new List<Camera079>();
-
-            foreach (var player in Server.Get.GetPlayers(x => x.Team == Team.SCP && x.RoleID != (int)RoleType.Scp079))
-                foreach (var cam in list)
-                    if (Vector3.Distance(cam.transform.position, player.Position) <= 15f)
-                        cams.Add(cam);
-
-            return cams;    
         }
     }
 }

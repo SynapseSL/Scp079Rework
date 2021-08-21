@@ -18,8 +18,8 @@ namespace Scp079Rework
         [Description("The Items with which Scp079-robot spawns")]
         public List<SerializedItem> Inventory = new List<SerializedItem>
         {
-            new SerializedItem((int)ItemType.GunUSP,18,0,0,0,UnityEngine.Vector3.one),
-            new SerializedItem((int)ItemType.Medkit,0,0,0,0,UnityEngine.Vector3.one),
+            new SerializedItem((int)ItemType.GunCOM18,18f,0u,UnityEngine.Vector3.one),
+            new SerializedItem((int)ItemType.Medkit,0f,0u,UnityEngine.Vector3.one),
         };
 
         [Description("The Amount of D-Personnel Robots Scp-079 can use")]

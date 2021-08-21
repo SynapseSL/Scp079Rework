@@ -47,11 +47,11 @@ namespace Scp079Rework.Commands
                     result.State = CommandResultState.NoPermission;
                     result.Message = "You have destroyed your current robot";
                     return result;
-                case "C": role = RoleType.ChaosInsurgency; break;
+                case "C": role = RoleType.ChaosRifleman; break;
                 case "D": role = RoleType.ClassD; break;
                 case "S": role = RoleType.Scientist; break;
                 case "G": role = RoleType.FacilityGuard; break;
-                case "M": role = RoleType.NtfLieutenant; break;
+                case "M": role = RoleType.NtfSergeant; break;
                 default:
                     result.Message = $"No Robot was found for {context.Arguments.At(0)}";
                     result.State = CommandResultState.Error;
@@ -104,7 +104,7 @@ namespace Scp079Rework.Commands
                     }
                     return false;
 
-                case RoleType.ChaosInsurgency:
+                case RoleType.ChaosRifleman:
                     if (Scp079Robot.Scp079CRobot >= 1)
                     {
                         Scp079Robot.Scp079CRobot--;
@@ -112,7 +112,7 @@ namespace Scp079Rework.Commands
                     }
                     return false;
 
-                case RoleType.NtfLieutenant:
+                case RoleType.NtfSergeant:
                     if (Scp079Robot.Scp079MRobot >= 1)
                     {
                         Scp079Robot.Scp079MRobot--;
