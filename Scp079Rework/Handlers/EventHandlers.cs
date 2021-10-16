@@ -12,6 +12,16 @@ namespace Scp079Rework.Handlers
             Event.Get.Player.PlayerKeyPressEvent += OnKeyPress;
             Event.Get.Player.PlayerDeathEvent += OnDeath;
             Event.Get.Round.WaitingForPlayersEvent += OnWaitng;
+            Event.Get.Player.PlayerSetClassEvent += OnSetClass;
+        }
+
+        private void OnSetClass(Synapse.Api.Events.SynapseEventArguments.PlayerSetClassEventArgs ev)
+        {
+            if(ev.Player.RoleID == 79)
+            {
+                ev.Position = PluginClass.Config.RobotSpawn.Parse().Position;
+
+            }
         }
 
         private void OnWaitng()

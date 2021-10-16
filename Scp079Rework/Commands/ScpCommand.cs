@@ -1,4 +1,6 @@
-﻿using Synapse.Api;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Synapse.Api;
 using Synapse.Command;
 using UnityEngine;
 
@@ -30,7 +32,13 @@ namespace Scp079Rework.Commands
                 };
 
             var cams = Map.Get.Cameras;
-            if(cams.Count > 0)
+            var scpCams = new List<Synapse.Api.Camera>();
+
+            foreach (var scp in Team.SCP.GetPlayers())
+                if (scp.RoleType != RoleType.Scp079)
+                    scpCams.Add(cams.OrderBy(x => Vector3.Distance(x.GameObject.transform.position, scp.Position)).FirstOrDefault());
+
+            if(scpCams.Count > 0)
             {
                 var cam = cams[UnityEngine.Random.Range(0, cams.Count)];
                 context.Player.Scp079Controller.Camera = cam;

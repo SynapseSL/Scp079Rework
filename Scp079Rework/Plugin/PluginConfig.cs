@@ -1,13 +1,14 @@
 ﻿using Synapse.Config;
 using System.ComponentModel;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scp079Rework
 {
     public class PluginConfig : AbstractConfigSection
     {
         [Description("The Mappoint where the Scp079Robot should spawn")]
-        public SerializedMapPoint RobotSpawn = new SerializedMapPoint("HCZ_079",5.037582f,-2.421814f,-9.088076f);
+        public SerializedMapPoint RobotSpawn = new SerializedMapPoint("HCZ_079", 9.3f, -2.4f, 0f);
 
         [Description("The Health with which Scp079Robot spwans")]
         public int Health = 50;
@@ -16,10 +17,21 @@ namespace Scp079Rework
         public bool RobotFF = false;
 
         [Description("The Items with which Scp079-robot spawns")]
-        public List<SerializedItem> Inventory = new List<SerializedItem>
+        public SerializedPlayerInventory Inventory { get; set; } = new SerializedPlayerInventory
         {
-            new SerializedItem((int)ItemType.GunCOM18,18f,0u,UnityEngine.Vector3.one),
-            new SerializedItem((int)ItemType.Medkit,0f,0u,UnityEngine.Vector3.one),
+            Items = new List<SerializedPlayerItem>
+            {
+                new SerializedPlayerItem((int)ItemType.GunCOM18, 15, 0, Vector3.one, 100, true),
+                new SerializedPlayerItem((int)ItemType.Medkit, 0, 0, Vector3.one, 100, false),
+            },
+            Ammo = new SerializedAmmo
+            {
+                Ammo12 = 30,
+                Ammo44 = 30,
+                Ammo5 = 30,
+                Ammo7 = 30,
+                Ammo9 = 30
+            }
         };
 
         [Description("The Amount of D-Personnel Robots Scp-079 can use")]

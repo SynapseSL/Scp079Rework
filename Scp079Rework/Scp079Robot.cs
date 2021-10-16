@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MEC;
 using Synapse.Api;
 
 namespace Scp079Rework
@@ -27,12 +26,10 @@ namespace Scp079Rework
         public override void Spawn()
         {
             Player.Position = PluginClass.Config.RobotSpawn.Parse().Position;
-            Player.ChangeRoleAtPosition(_role);
+            Player.RoleType = _role;
             Player.MaxHealth = PluginClass.Config.Health;
             Player.Health = PluginClass.Config.Health;
-            Player.Inventory.Clear();
-            foreach (var item in PluginClass.Config.Inventory)
-                Player.Inventory.AddItem(item.Parse());
+            PluginClass.Config.Inventory.Apply(Player);
 
             _bypass = Player.Bypass;
             Player.Bypass = true;

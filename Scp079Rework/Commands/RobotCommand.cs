@@ -43,7 +43,7 @@ namespace Scp079Rework.Commands
             switch (context.Arguments.At(0).ToUpper())
             {
                 case "079" when context.Player.RoleID == 79:
-                    context.Player.Hurt(9999999);
+                    context.Player.Kill();
                     result.State = CommandResultState.NoPermission;
                     result.Message = "You have destroyed your current robot";
                     return result;
@@ -62,7 +62,7 @@ namespace Scp079Rework.Commands
             {
                 if (context.Player.RoleID == 79)
                 {
-                    context.Player.Hurt(9999999);
+                    context.Player.Kill();
                     Timing.CallDelayed(0.1f, () => context.Player.CustomRole = new Scp079Robot(role));
                 }
                 else
