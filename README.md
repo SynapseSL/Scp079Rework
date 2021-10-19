@@ -13,6 +13,8 @@ Scp079 can use a command with .079 {command name}
 | scp | changes your current camera to a one near an other Scp |
 | robot | Allows Scp079 to change his Role to a robot |
 | scan | Gives a List of all Players with they Role and in which Zone they are |
+| explode | Spawns a Greande at the Camera |
+| random | Sets your current Camera to a random Camera in the foundation |
 
 ## Role Information
 ```
