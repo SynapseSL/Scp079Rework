@@ -1,5 +1,5 @@
-﻿using Synapse.Command;
-using MEC;
+﻿using MEC;
+using Synapse.Command;
 using UnityEngine;
 
 namespace Scp079Rework.Commands

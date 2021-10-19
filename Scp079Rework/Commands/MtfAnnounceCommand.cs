@@ -21,16 +21,14 @@ namespace Scp079Rework.Commands
 
         public CommandResult Execute(CommandContext context)
         {
-            string letter;
-            switch (UnityEngine.Random.Range(0f, 6f))
+            string letter = "q";
+            switch (Random.Range(0f, 6f))
             {
                 case 1f: letter = "a"; break;
                 case 2f: letter = "b"; break;
                 case 3f: letter = "d"; break;
                 case 4f: letter = "e"; break;
                 case 5f: letter = "i"; break;
-                case 6f: letter = "q"; break;
-                default: letter = "z"; break;
             }
 
             var scps = SynapseController.Server.GetPlayers(x => x.RealTeam == Team.SCP).Count;

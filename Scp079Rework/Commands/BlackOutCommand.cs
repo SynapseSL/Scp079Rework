@@ -1,5 +1,5 @@
-﻿using Synapse.Command;
-using Synapse.Api;
+﻿using Synapse.Api;
+using Synapse.Command;
 using UnityEngine;
 
 namespace Scp079Rework.Commands

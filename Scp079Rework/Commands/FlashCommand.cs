@@ -1,4 +1,5 @@
-﻿using Synapse.Command;
+﻿using Synapse.Api.Enum;
+using Synapse.Command;
 using UnityEngine;
 
 namespace Scp079Rework.Commands
@@ -29,7 +30,7 @@ namespace Scp079Rework.Commands
                 };
 
 
-            Synapse.Api.Map.Get.Explode(context.Player.Position,Synapse.Api.Enum.GrenadeType.Flashbang,context.Player);
+            Synapse.Api.Map.Get.Explode(context.Player.Position, GrenadeType.Flashbang, context.Player);
 
             return new CommandResult
             {

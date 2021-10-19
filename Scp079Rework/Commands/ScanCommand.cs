@@ -1,7 +1,7 @@
-﻿using Synapse.Command;
-using Synapse;
-using UnityEngine;
+﻿using Synapse;
 using Synapse.Api.Enum;
+using Synapse.Command;
+using UnityEngine;
 
 namespace Scp079Rework.Commands
 {
