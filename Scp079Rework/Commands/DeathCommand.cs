@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using Synapse.Api;
+﻿using Synapse.Api;
 using Synapse.Command;
+using System.Linq;
 using UnityEngine;
 
 namespace Scp079Rework.Commands

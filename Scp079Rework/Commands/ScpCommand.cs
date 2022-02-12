@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Synapse;
 using Synapse.Api;
 using Synapse.Command;
+using System.Linq;
 using UnityEngine;
 
 namespace Scp079Rework.Commands
@@ -31,16 +31,14 @@ namespace Scp079Rework.Commands
                     State = CommandResultState.Error
                 };
 
-            var cams = Map.Get.Cameras;
-            var scpCams = new List<Synapse.Api.Camera>();
-
-            foreach (var scp in Team.SCP.GetPlayers())
-                if (scp.RoleType != RoleType.Scp079)
-                    scpCams.Add(cams.OrderBy(x => Vector3.Distance(x.GameObject.transform.position, scp.Position)).FirstOrDefault());
-
-            if(scpCams.Count > 0)
+            var scps = Server.Get.GetPlayers(x => x.TeamID == (int)Team.SCP && x.RoleType != RoleType.Scp079);
+            if(scps.Count > 0)
             {
-                var cam = cams[UnityEngine.Random.Range(0, cams.Count)];
+                var scp = scps[Random.Range(0, scps.Count)];
+                var cams = Map.Get.Cameras.OrderBy(x => Vector3.Distance(x.GameObject.transform.position, scp.Position)).ToList();
+                cams = cams.Take(5).ToList();
+                var cam = cams[Random.Range(0, cams.Count)];
+
                 context.Player.Scp079Controller.Camera = cam;
                 return new CommandResult
                 {
@@ -48,14 +46,12 @@ namespace Scp079Rework.Commands
                     State = CommandResultState.Ok
                 };
             }
-            else
+
+            return new CommandResult
             {
-                return new CommandResult
-                {
-                    Message = "No Scp near a camera was found!",
-                    State = CommandResultState.Error
-                };
-            }
+                Message = "No Scp near a camera was found!",
+                State = CommandResultState.Error
+            };
         }
     }
 }

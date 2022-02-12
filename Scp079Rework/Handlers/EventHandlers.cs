@@ -1,7 +1,7 @@
-﻿using Event = Synapse.Api.Events.EventHandler;
-using UnityEngine;
+﻿using System;
 using System.Linq;
-using System;
+using UnityEngine;
+using Event = Synapse.Api.Events.EventHandler;
 
 namespace Scp079Rework.Handlers
 {

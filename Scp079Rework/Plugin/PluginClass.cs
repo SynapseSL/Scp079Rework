@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Scp079Rework.Handlers;
+﻿using Scp079Rework.Handlers;
 using Synapse.Api.Plugin;
 using Synapse.Translation;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Scp079Rework
 {
@@ -13,9 +13,9 @@ namespace Scp079Rework
         Description = "A Plugin which gives Scp-079 a lot of new Features",
         LoadPriority = 10,
         SynapseMajor = 2,
-        SynapseMinor = 7,
-        SynapsePatch = 1,
-        Version = "v.2.2.0"
+        SynapseMinor = 8,
+        SynapsePatch = 3,
+        Version = "v.2.2.1"
         )]
     public class PluginClass : AbstractPlugin
     {
