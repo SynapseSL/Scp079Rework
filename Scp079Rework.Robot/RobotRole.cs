@@ -15,11 +15,13 @@ public class RobotRole : SynapseRole
 {
     private readonly Scp079Robot _plugin;
     private readonly HeavyZoneService _heavyZone;
+    private readonly CassieService _cassie;
 
-    public RobotRole(Scp079Robot plugin, HeavyZoneService heavyZone)
+    public RobotRole(Scp079Robot plugin, HeavyZoneService heavyZone, CassieService cassie)
     {
         _plugin = plugin;
         _heavyZone = heavyZone;
+        _cassie = cassie;
     }
 
     public RoleType SpawnRole { get; set; } = RoleType.ClassD;
@@ -33,7 +35,13 @@ public class RobotRole : SynapseRole
 
     public override void DeSpawn(DespawnReason reason)
     {
-        if (reason != DespawnReason.Death || _heavyZone.Is079Recontained) return;
+        if (reason != DespawnReason.Death) return;
+
+        if (_heavyZone.Is079Recontained)
+        {
+            _cassie.AnnounceScpDeath("079-2");
+            return;
+        }
 
         Player.RoleID = (int)RoleType.Scp079;
     }

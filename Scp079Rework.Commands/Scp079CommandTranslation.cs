@@ -30,4 +30,10 @@ public class Scp079CommandTranslation : Translations<Scp079CommandTranslation>
     public string NoScp { get; set; } = "No Scp was found near a Camera";
 
     public string Scp { get; set; } = "Your now near another SCP";
+
+    public string OverchargeStillActive { get; set; } = "The Overcharge is still in Progress";
+
+    public string OverchargeNoGenerator { get; set; } = "You can't use overcharge sine no Generator is active";
+
+    public string Overcharge { get; set; } = "Overcharge started";
 }

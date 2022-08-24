@@ -118,8 +118,9 @@
         <Compile Include="EventHandlers.cs" />
         <Compile Include="ExplodeCommand.cs" />
         <Compile Include="FlashCommand.cs" />
-        <Compile Include="LockDownCommand.cs" />
+        <Compile Include="LockdownCommand.cs" />
         <Compile Include="MtfAnnounceCommand.cs" />
+        <Compile Include="OverchargeCommand.cs" />
         <Compile Include="RandomCommand.cs" />
         <Compile Include="ScanCommand.cs" />
         <Compile Include="Scp079CommandConfigs.cs" />

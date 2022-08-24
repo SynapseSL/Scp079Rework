@@ -20,4 +20,10 @@ public class Scp079CommandConfigs : IDocumentSection
     public bool AllowChangingExplodeTime { get; set; } = true;
     
     public bool AllowChangingFlashTime { get; set; } = true;
+
+    public string OverchargeCassie { get; set; } = "Warning , all Facility power return to Heavy Zone in 3 . 2 . 1";
+
+    public float OverchargeDelay { get; set; } = 10.5f;
+
+    public float OverchargeTime { get; set; } = 20f;
 }

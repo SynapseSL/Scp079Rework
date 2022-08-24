@@ -20,20 +20,20 @@ namespace Scp079Rework.Commands;
     ExperienceGain = 30f,
     RequiredLevel = 4
 )]
-public class LockDownCommand : Scp079Command
+public class LockdownCommand : Scp079Command
 {
     private readonly Scp079Commands _plugin;
     private readonly MapService _map;
     private readonly CassieService _cassie;
 
-    public LockDownCommand(Scp079Commands plugin, MapService map, CassieService cassie)
+    public LockdownCommand(Scp079Commands plugin, MapService map, CassieService cassie)
     {
         _plugin = plugin;
         _map = map;
         _cassie = cassie;
     }
     
-    public bool OnLockDown { get; set; }
+    public bool OnLockDown { get; private set; }
     
     public override void ExecuteCommand(Scp079Context context, ref CommandResult result)
     {
@@ -49,7 +49,7 @@ public class LockDownCommand : Scp079Command
         result.Response = _plugin.Translation.Get(context.Scp079).Lockdown;
     }
 
-    private IEnumerator<float> LockDown()
+    public IEnumerator<float> LockDown()
     {
         OnLockDown = true;
         var lockedDoors = new List<SynapseDoor>();

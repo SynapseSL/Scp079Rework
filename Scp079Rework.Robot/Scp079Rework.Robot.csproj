@@ -110,6 +110,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="EventHandler.cs" />
         <Compile Include="RobotCommand.cs" />
         <Compile Include="RobotRole.cs" />
         <Compile Include="Scp079Robot.cs" />
