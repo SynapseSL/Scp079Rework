@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scp079Rework", "Scp079Rewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scp079Rework.Commands", "Scp079Rework.Commands\Scp079Rework.Commands.csproj", "{41F39545-2B80-4300-8AD6-FE920CFAF088}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scp079Rework.Robot", "Scp079Rework.Robot\Scp079Rework.Robot.csproj", "{D0887852-E1CE-4E6A-BD90-5978D40C503F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{41F39545-2B80-4300-8AD6-FE920CFAF088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41F39545-2B80-4300-8AD6-FE920CFAF088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41F39545-2B80-4300-8AD6-FE920CFAF088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0887852-E1CE-4E6A-BD90-5978D40C503F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0887852-E1CE-4E6A-BD90-5978D40C503F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0887852-E1CE-4E6A-BD90-5978D40C503F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0887852-E1CE-4E6A-BD90-5978D40C503F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,12 +7,16 @@ namespace Scp079Rework.Commands;
     Name = "SCP-079 Commands",
     Description = "Adds Command for SCP-079 with the SCP-079 Rework Module",
     Author = "Dimenzio",
-    Version = "1.0.0"
+    Version = "1.0.0",
+    Repository = "https://github.com/SynapseSL/Scp079Rework"
 )]
-public class Scp079Commands : ReloadablePlugin
+public class Scp079Commands : ReloadablePlugin<Scp079CommandConfigs, Scp079CommandTranslation>
 {
-    public override void Load()
+    public EventHandlers EventHandlers { get; set; }
+
+    public override void EnablePlugin()
     {
+        EventHandlers = Synapse.GetAndBind<EventHandlers>();
         Logger.Info("Enabled SCP-079 Commands");
     }
 }

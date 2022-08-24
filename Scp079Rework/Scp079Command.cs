@@ -24,7 +24,7 @@ public abstract class Scp079Command : Command<Scp079Context>
         }
         
         var module = Synapse.Get<Scp079Rework>();
-        if (Time.time < CurrentCooldown)
+        if (Time.time < CurrentCooldown && !context.Scp079.Bypass)
         {
             return new CommandResult()
             {
@@ -71,9 +71,12 @@ public abstract class Scp079Command : Command<Scp079Context>
         if (result.StatusCode != CommandStatusCode.Ok) return;
         var module = Synapse.Get<Scp079Rework>();
 
-        if (!context.Scp079.Bypass) context.Scp079.ScpController.Scp079.Energy -= GetRequiredEnergy(module);
+        if (!context.Scp079.Bypass)
+        {
+            context.Scp079.ScpController.Scp079.Energy -= GetRequiredEnergy(module);
+            CurrentCooldown = Time.time + GetCooldown(module);
+        }
         context.Scp079.ScpController.Scp079.GiveExperience(GetExperienceGain(module));
-        CurrentCooldown = Time.time + GetCooldown(module);
     }
 
     public int GetRequiredLevel(Scp079Rework module)

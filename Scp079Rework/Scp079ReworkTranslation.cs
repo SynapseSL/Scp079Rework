@@ -18,5 +18,5 @@ public class Scp079ReworkTranslation : Translations<Scp079ReworkTranslation>
 
     public string EnergyToLow { get; set; } = "You haven't enough Energy. You need at lest %energy%";
 
-    public string CommandList { get; set; } = "This are all Commands that SCP-079 can use:";
+    public string CommandList { get; set; } = "These are all Commands that SCP-079 can use:";
 }

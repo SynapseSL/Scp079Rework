@@ -20,8 +20,9 @@ namespace Scp079Rework;
         typeof(CommandsModule),
         typeof(ConfigsModule)
     },
-    Description = "A Module that allows Plugin to create new Commands for SCP-079",
-    Version = "3.0.0"
+    Description = "A Module that allows Plugins to create new Commands for SCP-079",
+    Version = "3.0.0",
+    Repository = "https://github.com/SynapseSL/Scp079Rework"
     )]
 public class Scp079Rework : ReloadableModule<Scp079ReworkConfig, Scp079ReworkTranslation>
 {

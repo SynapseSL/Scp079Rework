@@ -6,7 +6,6 @@ using Neuron.Modules.Commands.Command;
 using Respawning;
 using Respawning.NamingRules;
 using Synapse3.SynapseModule.Enums;
-using Synapse3.SynapseModule.Map;
 using Synapse3.SynapseModule.Player;
 using UnityEngine;
 using Utils.Networking;
@@ -26,10 +25,12 @@ namespace Scp079Rework.Commands;
 public class MtfAnnounceCommand : Scp079Command
 {
     private readonly PlayerService _player;
+    private readonly Scp079Commands _plugin;
 
-    public MtfAnnounceCommand(PlayerService player)
+    public MtfAnnounceCommand(PlayerService player, Scp079Commands plugin)
     {
         _player = player;
+        _plugin = plugin;
     }
     
     public override void ExecuteCommand(Scp079Context context, ref CommandResult result)
@@ -43,7 +44,7 @@ public class MtfAnnounceCommand : Scp079Command
 
         if (!int.TryParse(context.Arguments[0], out var number) || number < 0)
         {
-            result.Response = "Invalid Number";
+            result.Response = _plugin.Translation.Get(context.Scp079).InvalidNumber;
             result.StatusCode = CommandStatusCode.Forbidden;
             return;
         }
@@ -55,7 +56,7 @@ public class MtfAnnounceCommand : Scp079Command
                 "-" + Random.Range(1, 20).ToString("00");
 
             PlayAnnouncement(number, unit, namingRule);
-            result.Response = "MTF Announcement was send";
+            result.Response = _plugin.Translation.Get(context.Scp079).MtfAnnouncement;
             return;
         }
 
