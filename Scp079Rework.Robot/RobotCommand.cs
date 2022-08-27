@@ -1,8 +1,12 @@
 ﻿using System.Globalization;
+using MEC;
+using Neuron.Core.Logging;
 using Neuron.Core.Meta;
 using Neuron.Modules.Commands;
 using Neuron.Modules.Commands.Command;
 using Synapse3.SynapseModule;
+using Synapse3.SynapseModule.Enums;
+using Synapse3.SynapseModule.Map;
 
 namespace Scp079Rework.Robot;
 
@@ -19,15 +23,47 @@ namespace Scp079Rework.Robot;
 public class RobotCommand : Scp079Command
 {
     private readonly Scp079Robot _plugin;
+    private readonly HeavyZoneService _heavyZone;
+    private readonly NukeService _nuke;
 
-    public RobotCommand(Scp079Robot plugin)
+    public RobotCommand(Scp079Robot plugin, HeavyZoneService heavyZone, NukeService nuke)
     {
         _plugin = plugin;
+        _heavyZone = heavyZone;
+        _nuke = nuke;
     }
 
     public override void ExecuteCommand(Scp079Context context, ref CommandResult result)
     {
-        result.Response = "Robot Command!";
+        var script = context.Scp079.GetComponent<Scp079Script>();
+
+        if (context.Arguments.Length != 0 && uint.TryParse(context.Arguments[0], out var index))
+        {
+            if (index == script.Robots.Count && !_heavyZone.Is079Recontained && _nuke.State != NukeState.Detonated)
+            {
+                script.LeaveRobot();
+                result.Response = _plugin.Translation.Get(context.Scp079).BackInto079;
+                return;
+            }
+
+            if (index < script.Robots.Count)
+            {
+                script.TakeRobot(script.Robots[(int)index]);
+                result.Response = _plugin.Translation.Get(context.Scp079).IntoRobot;
+                return;
+            }
+        }
+
+        var msg = "\n" + _plugin.Translation.Get(context.Scp079).RobotList;
+        for (int i = 0; i < script.Robots.Count; i++)
+        {
+            msg += $"\n{i} - {script.Robots[i].RobotName}";
+        }
+
+        if (context.Scp079.RoleID == 79 && !_heavyZone.Is079Recontained && _nuke.State != NukeState.Detonated)
+            msg += $"\n{script.Robots.Count} - Scp079";
+
+        result.Response = msg;
     }
 
     public override CommandResult PreExecute(Scp079Context context)

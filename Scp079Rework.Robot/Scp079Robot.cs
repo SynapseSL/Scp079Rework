@@ -12,8 +12,11 @@ namespace Scp079Rework.Robot;
 )]
 public class Scp079Robot : ReloadablePlugin<Scp079RobotsConfig, Scp079RobotTranslation>
 {
+    public EventHandler EventHandler { get; set; }
+    
     public override void EnablePlugin()
     {
+        EventHandler = Synapse.GetAndBind<EventHandler>();
         Logger.Info("Enabled SCP-079 Robot");
     }
 }

@@ -14,26 +14,90 @@ namespace Scp079Rework.Robot;
 public class Scp079RobotsConfig : IDocumentSection
 {
     public bool Ff { get; set; } = false;
-    
-    public Dictionary<int, RobotConfiguration> Robots { get; set; } = new Dictionary<int, RobotConfiguration>()
-    {
 
+    public List<RobotConfiguration> Robots { get; set; } = new()
+    {
+        new RobotConfiguration()
+        {
+            SpawnLocation = new RoomPoint()
+            {
+                roomName = "Scp079",
+                position = new SerializedVector3(-1f, -5.87f, -5.95f),
+                rotation = new SerializedVector3(0f, 180f, 0f)
+            },
+            Inventory = new SerializedPlayerInventory()
+            {
+                Items = new List<SerializedPlayerItem>()
+                {
+                    new SerializedPlayerItem((uint)ItemType.GunCOM15,15,0u,Vector3.one, 100,true)
+                },
+                Ammo = new SerializedAmmo()
+                {
+                    Ammo9 = 30
+                }
+            },
+            RoleType = RoleType.FacilityGuard,
+            Name = "Facility Guard Unit"
+        },
+        new RobotConfiguration()
+        {
+            SpawnLocation = new RoomPoint()
+            {
+                roomName = "Scp079",
+                position = new SerializedVector3(-2f, -5.87f, -5.95f),
+                rotation = new SerializedVector3(0f, 180f, 0f)
+            },
+            Inventory = new SerializedPlayerInventory()
+            {
+                Items = new List<SerializedPlayerItem>()
+                {
+                    new SerializedPlayerItem((uint)ItemType.GunCOM15,15,0u,Vector3.one, 100,true)
+                },
+                Ammo = new SerializedAmmo()
+                {
+                    Ammo9 = 30
+                }
+            },
+            RoleType = RoleType.ClassD,
+            Name = "Class D Unit"
+        },
+        new RobotConfiguration()
+        {
+            SpawnLocation = new RoomPoint()
+            {
+                roomName = "Scp079",
+                position = new SerializedVector3(-3f, -5.87f, -5.95f),
+                rotation = new SerializedVector3(0f, 180f, 0f)
+            },
+            Inventory = new SerializedPlayerInventory()
+            {
+                Items = new List<SerializedPlayerItem>()
+                {
+                    new SerializedPlayerItem((uint)ItemType.GunCOM15,15,0u,Vector3.one, 100,true)
+                },
+                Ammo = new SerializedAmmo()
+                {
+                    Ammo9 = 30
+                }
+            },
+            RoleType = RoleType.Scientist,
+            Name = "Scientist Unit"
+        }
     };
 
+    [Serializable]
     public class RobotConfiguration
     {
-        public int Amount { get; set; } = 1;
-        
-        public List<RoomPoint> RobotSpawns { get; set; } = new List<RoomPoint>()
-        {
-            new("", new Vector3(9.3f, -2.4f, 0f), Vector3.zero)
-        };
+        public RoomPoint SpawnLocation { get; set; } = new();
 
-        public SerializedPlayerInventory Inventory { get; set; } = new SerializedPlayerInventory()
-        {
+        public SerializedPlayerInventory Inventory { get; set; } = new();
 
-        };
+        public RoleType RoleType { get; set; } = RoleType.ClassD;
 
         public int Health { get; set; } = 50;
+
+        public SerializedVector3 Scale { get; set; } = Vector3.one;
+
+        public string Name { get; set; } = "Facility Guard Unit";
     }
 }

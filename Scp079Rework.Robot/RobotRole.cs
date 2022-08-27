@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using Neuron.Core.Logging;
 using Neuron.Core.Meta;
+using Synapse3.SynapseModule;
+using Synapse3.SynapseModule.Enums;
 using Synapse3.SynapseModule.Map;
 using Synapse3.SynapseModule.Role;
 
@@ -16,32 +19,42 @@ public class RobotRole : SynapseRole
     private readonly Scp079Robot _plugin;
     private readonly HeavyZoneService _heavyZone;
     private readonly CassieService _cassie;
+    private readonly NukeService _nuke;
 
-    public RobotRole(Scp079Robot plugin, HeavyZoneService heavyZone, CassieService cassie)
+    public RobotRole(Scp079Robot plugin, HeavyZoneService heavyZone, CassieService cassie, NukeService nuke)
     {
         _plugin = plugin;
         _heavyZone = heavyZone;
         _cassie = cassie;
+        _nuke = nuke;
     }
 
-    public RoleType SpawnRole { get; set; } = RoleType.ClassD;
-    
     public override void SpawnPlayer(bool spawnLite)
     {
         if(spawnLite) return;
 
-        Player.ChangeRoleLite(SpawnRole);
+        //So normally a SCP-079 Robot is always spawned lite but for the case someone is set manually is here a backup
+        Player.RoleType = RoleType.FacilityGuard;
     }
 
     public override void DeSpawn(DespawnReason reason)
     {
         if (reason != DespawnReason.Death) return;
 
-        if (_heavyZone.Is079Recontained)
+        if (_heavyZone.Is079Recontained || _nuke.State == NukeState.Detonated)
         {
+            var script = Player.GetComponent<Scp079Script>();
+            if (script.Robots.Count > 0)
+            {
+                script.TakeRobot(script.Robots[0]);
+                return;
+            }
+            
             _cassie.AnnounceScpDeath("079-2");
             return;
         }
+        
+        NeuronLogger.For<Synapse>().Warn("SET TO 079");
 
         Player.RoleID = (int)RoleType.Scp079;
     }
