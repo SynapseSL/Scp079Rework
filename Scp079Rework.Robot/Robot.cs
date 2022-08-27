@@ -35,9 +35,10 @@ public class Robot : SynapseDummy
         Owner = player;
         Player.Scale = configuration.Scale;
         RobotName = configuration.Name;
+        Player.GodMode = false;
         Player.Health = configuration.Health;
 
-        var rot = configuration.SpawnLocation.GetMapRotation();
+        var rot = configuration.SpawnLocation.GetMapRotation().eulerAngles;
         PlayerState = new SerializedPlayerState()
         {
             Health = configuration.Health,
@@ -52,7 +53,7 @@ public class Robot : SynapseDummy
     }
 
     public Robot(SynapsePlayer player, string robotName) : base(player.Position, player.RotationVector2, player.RoleType,
-        string.IsNullOrWhiteSpace(player.DisplayName) ? player.NickName : player.DisplayName, player.RankName, player.RankColor)
+        string.IsNullOrWhiteSpace(player.DisplayName) ? player.NickName : player.DisplayName, player.HideRank ? "" : player.RankName, player.HideRank ? "" : player.RankColor)
     {
         Owner = player;
         RobotName = robotName;
