@@ -32,7 +32,7 @@ public class Scp079ReworkConfig : IDocumentSection
         public string Name { get; set; }
         public int RequiredLevel { get; set; } 
         public float EnergyUsage { get; set; }
-        public float ExperienceGain { get; set; }
+        public int ExperienceGain { get; set; }
         public float Cooldown { get; set; }
     }
 }

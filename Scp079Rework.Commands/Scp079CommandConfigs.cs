@@ -9,10 +9,6 @@ namespace Scp079Rework.Commands;
 [DocumentSection("SCP 079 Commands")]
 public class Scp079CommandConfigs : IDocumentSection
 {
-    public float BlackoutDuration { get; set; } = 10f;
-
-    public string BlackoutCassie { get; set; } = "Facility Black out";
-    
     public float LockdownDuration { get; set; } = 10f;
 
     public string LockdownCassie { get; set; } = "Facility Lockdown";
@@ -20,6 +16,8 @@ public class Scp079CommandConfigs : IDocumentSection
     public bool AllowChangingExplodeTime { get; set; } = true;
     
     public bool AllowChangingFlashTime { get; set; } = true;
+    
+    public bool AllowInstantExplode { get; set; } = true;
 
     public string OverchargeCassie { get; set; } = "Warning , all Facility power return to Heavy Zone in 3 . 2 . 1";
 

@@ -1,9 +1,6 @@
-﻿using Neuron.Core.Logging;
-using Synapse3.SynapseModule;
-using Synapse3.SynapseModule.Config;
+﻿using Synapse3.SynapseModule.Config;
 using Synapse3.SynapseModule.Dummy;
 using Synapse3.SynapseModule.Item;
-using Synapse3.SynapseModule.Map.Rooms;
 using Synapse3.SynapseModule.Player;
 using UnityEngine;
 
@@ -25,7 +22,8 @@ public class Robot : SynapseDummy
         Destroy();
     }
 
-    public Robot(SynapsePlayer player, Scp079RobotsConfig.RobotConfiguration configuration) : base(
+    public Robot(SynapsePlayer player, Scp079RobotsConfig.RobotConfiguration configuration)
+         : base(
         configuration.SpawnLocation.GetMapPosition(),
         new Vector2(configuration.SpawnLocation.GetMapRotation().eulerAngles.x,
             configuration.SpawnLocation.GetMapRotation().eulerAngles.y), configuration.RoleType,
@@ -37,14 +35,12 @@ public class Robot : SynapseDummy
         RobotName = configuration.Name;
         Player.GodMode = false;
         Player.Health = configuration.Health;
-
-        var rot = configuration.SpawnLocation.GetMapRotation().eulerAngles;
+        
         PlayerState = new SerializedPlayerState()
         {
             Health = configuration.Health,
             Inventory = configuration.Inventory,
-            Position = configuration.SpawnLocation.GetMapPosition(),
-            Rotation = new SerializedVector2(rot.x, rot.y),
+            Position = configuration.SpawnLocation,
             Scale = configuration.Scale,
             MaxHealth = configuration.Health,
             RoleType = Player.RoleType,

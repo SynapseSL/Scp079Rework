@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Neuron.Modules.Commands;
 using Neuron.Modules.Commands.Command;
+using PlayerRoles;
 using Synapse3.SynapseModule;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public abstract class Scp079Command : Command<Scp079Context>
     
     public override CommandResult PreExecute(Scp079Context context)
     {
-        if (context.Scp079.RoleType != RoleType.Scp079)
+        if (context.Scp079.RoleType != RoleTypeId.Scp079)
         {
             return new CommandResult()
             {
@@ -35,7 +36,7 @@ public abstract class Scp079Command : Command<Scp079Context>
         }
 
         var level = GetRequiredLevel(module);
-        if (level > context.Scp079.ScpController.Scp079.Level && !context.Scp079.Bypass)
+        if (level > context.Scp079.MainScpController.Scp079.Level && !context.Scp079.Bypass)
         {
             return new CommandResult()
             {
@@ -45,7 +46,7 @@ public abstract class Scp079Command : Command<Scp079Context>
         }
 
         var neededEnergy = GetRequiredEnergy(module);
-        if (neededEnergy > context.Scp079.ScpController.Scp079.Energy && !context.Scp079.Bypass)
+        if (neededEnergy > context.Scp079.MainScpController.Scp079.Energy && !context.Scp079.Bypass)
         {
             return new CommandResult()
             {
@@ -73,10 +74,13 @@ public abstract class Scp079Command : Command<Scp079Context>
 
         if (!context.Scp079.Bypass)
         {
-            context.Scp079.ScpController.Scp079.Energy -= GetRequiredEnergy(module);
+            context.Scp079.MainScpController.Scp079.Energy -= GetRequiredEnergy(module);
             CurrentCooldown = Time.time + GetCooldown(module);
         }
-        context.Scp079.ScpController.Scp079.GiveExperience(GetExperienceGain(module));
+        
+        var exp = GetExperienceGain(module);
+        if (exp > 0)
+            context.Scp079.MainScpController.Scp079.GiveExperience(exp);
     }
 
     public int GetRequiredLevel(Scp079Rework module)
@@ -117,7 +121,7 @@ public abstract class Scp079Command : Command<Scp079Context>
         return (Meta as Scp079CommandAttribute)?.EnergyUsage ?? 0f;
     }
     
-    public float GetExperienceGain(Scp079Rework module)
+    public int GetExperienceGain(Scp079Rework module)
     {
         foreach (var configuration in module.Config.CommandConfigurations)
         {
@@ -133,7 +137,7 @@ public abstract class Scp079Command : Command<Scp079Context>
             }
         }
 
-        return (Meta as Scp079CommandAttribute)?.ExperienceGain ?? 0f;
+        return (Meta as Scp079CommandAttribute)?.ExperienceGain ?? 0;
     }
     
     public float GetCooldown(Scp079Rework module)

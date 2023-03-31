@@ -1,39 +1,49 @@
-﻿using Neuron.Core.Logging;
-using Synapse3.SynapseModule;
+﻿using MEC;
+using Neuron.Core.Events;
+using Neuron.Core.Meta;
+using Ninject;
+using PlayerRoles;
 using Synapse3.SynapseModule.Dummy;
 using Synapse3.SynapseModule.Enums;
 using Synapse3.SynapseModule.Events;
-using Synapse3.SynapseModule.Map;
 using Synapse3.SynapseModule.Player;
-using UnityEngine;
 
 namespace Scp079Rework.Robot;
 
-public class EventHandler
+[Automatic]
+public class EventHandler : Listener
 {
-    private readonly Scp079Robot _plugin;
-    private readonly PlayerService _player;
-    private readonly NukeService _nuke;
+    [Inject]
+    public Scp079Robot Plugin { get; set; }
+    
+    [Inject]
+    public Scp079Rework Module { get; set; }
+    
+    [Inject]
+    public PlayerService Player { get; set; }
 
-    public EventHandler(PlayerEvents player, MapEvents map, Scp079Robot plugin, PlayerService playerService,
-        NukeService nuke)
+    [EventHandler]
+    public void Contain(Scp079ContainEvent ev)
     {
-        _plugin = plugin;
-        _player = playerService;
-        _nuke = nuke;
-
-        player.Death.Subscribe(Death);
-        player.FallingIntoAbyss.Subscribe(FallingIntoAbyss);
-        player.DoorInteract.Subscribe(DoorInteract);
-        player.HarmPermission.Subscribe(HarmPermission);
-        player.LoadComponent.Subscribe(LoadComponent);
-        player.SetClass.Subscribe(SetClass);
-        map.DetonateWarhead.Subscribe(Detonate);
+        if(ev.Status != Scp079ContainmentStatus.Overcharge) return;
+        var level = RobotCommand.Command.GetRequiredLevel(Module);
+        foreach (var player in Player.Players)
+        {
+            if (player.RoleID != (uint)RoleTypeId.Scp079) continue;
+            if (level > player.MainScpController.Scp079.Level && !player.Bypass) continue;
+            var script = player.GetComponent<Scp079Script>();
+            if (script.Robots.Count < 1) continue;
+            script.TakeRobot(script.Robots[0]);
+            player.SendHint(Plugin.Translation.Get(player).ForcedIntoRobot,15);
+            player.GodMode = true;
+            Timing.CallDelayed(0.2f, () => player.GodMode = false);
+        }
     }
-
-    private void Detonate(DetonateWarheadEvent _)
+    
+    [EventHandler]
+    public void Detonate(DetonateWarheadEvent _)
     {
-        foreach (var player in _player.Players)
+        foreach (var player in Player.Players)
         {
             foreach (var robot in player.GetComponent<Scp079Script>().Robots)
             {
@@ -43,43 +53,48 @@ public class EventHandler
         }
     }
 
-    private void SetClass(SetClassEvent ev)
+    [EventHandler]
+    public void SetClass(SetClassEvent ev)
     {
-        if (ev.Role == RoleType.Scp079)
+        if (ev.Role == RoleTypeId.Scp079)
         {
             ev.Player.GetComponent<Scp079Script>().SpawnRobots();
         }
     }
 
-    private void LoadComponent(LoadComponentEvent ev) => ev.AddComponent<Scp079Script>();
+    [EventHandler]
+    public void LoadComponent(LoadComponentEvent ev) => ev.AddComponent<Scp079Script>();
 
-    private void HarmPermission(HarmPermissionEvent ev)
+    [EventHandler]
+    public void HarmPermission(HarmPermissionEvent ev)
     {
         if (ev.Victim.PlayerType != PlayerType.Dummy) return;
         if (ev.Victim is not DummyPlayer { SynapseDummy: Robot robot }) return;
 
         ev.Allow = Synapse3Extensions.GetHarmPermission(ev.Attacker, robot.Owner);
-        NeuronLogger.For<Synapse>().Warn("Harm Permission on Robot: " + ev.Allow);
     }
 
-    private void FallingIntoAbyss(FallingIntoAbyssEvent ev)
+    [EventHandler]
+    public void FallingIntoAbyss(FallingIntoAbyssEvent ev)
     {
-        if (ev.Player.RoleType == RoleType.Scp079) ev.Allow = false;
+        if (ev.Player.RoleType == RoleTypeId.Scp079) ev.Allow = false;
     }
 
-    private void DoorInteract(DoorInteractEvent ev)
+    [EventHandler]
+    public void DoorInteract(DoorInteractEvent ev)
     {
         if (ev.Player.RoleID == 79) ev.Allow = true;
     }
 
-    private void Death(DeathEvent ev)
+    [EventHandler]
+    public void Death(DeathEvent ev)
     {
         if(ev.Attacker == null || ev.Player.PlayerType != PlayerType.Player) return;
 
         if (ev.Player.RoleID == 79)
-            ev.Attacker.SendBroadcast(_plugin.Translation.Get(ev.Attacker).KilledRobot, 5);
+            ev.Attacker.SendBroadcast(Plugin.Translation.Get(ev.Attacker).KilledRobot, 5);
 
         if (ev.Attacker.RoleID == 79)
-            ev.Player.SendWindowMessage(_plugin.Translation.Get(ev.Player).KilledByRobot.Replace("\\n", "\n"));
+            ev.Player.SendWindowMessage(Plugin.Translation.Get(ev.Player).KilledByRobot.Replace("\\n", "\n"));
     }
 }

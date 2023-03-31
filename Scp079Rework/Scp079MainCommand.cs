@@ -2,6 +2,8 @@
 using Neuron.Modules.Commands;
 using Neuron.Modules.Commands.Command;
 using Neuron.Modules.Commands.Event;
+using Ninject;
+using PlayerRoles;
 using Synapse3.SynapseModule.Command;
 
 namespace Scp079Rework;
@@ -17,14 +19,14 @@ public class Scp079MainCommand : SynapseCommand
 {
     public CommandReactor.FallbackHandler NoCommandResponse;
     
-    private readonly Scp079CommandService _commandService;
-    private readonly Scp079Rework _module;
+    [Inject]
+    public Scp079CommandService CommandService { get; set; }
+    
+    [Inject]
+    public Scp079Rework Module { get; set; }
 
-    public Scp079MainCommand(Scp079CommandService commandService, Scp079Rework module)
+    public Scp079MainCommand()
     {
-        _commandService = commandService;
-        _module = module;
-        
         NoCommandResponse = DefaultHelp;
     }
     
@@ -45,18 +47,18 @@ public class Scp079MainCommand : SynapseCommand
             return;
         }
         
-        var commandResult = _commandService.Scp079Commands.Invoke(Scp079Context.Of(newCommand, context.Player), newCommand);
+        var commandResult = CommandService.Scp079Commands.Invoke(Scp079Context.Of(newCommand, context.Player), newCommand);
         result.Response = commandResult.Response;
         result.StatusCodeInt = commandResult.StatusCodeInt;
     }
 
     public CommandResult DefaultHelp(CommandEvent args)
     {
-        if (!_module.Config.ShowCommandListToOthers && args.Context is SynapseContext context && context.Player.RoleType != RoleType.Scp079)
+        if (!Module.Config.ShowCommandListToOthers && args.Context is SynapseContext context && context.Player.RoleType != RoleTypeId.Scp079)
         {
             return new CommandResult()
             {
-                Response = _module.Translation.Get(context.Player).Not079,
+                Response = Module.Translation.Get(context.Player).Not079,
                 StatusCode = CommandStatusCode.Forbidden
             };
         }
@@ -70,9 +72,9 @@ public class Scp079MainCommand : SynapseCommand
 
     public string GenerateHelpList()
     {
-        var msg = "\n" + _module.Translation.CommandList;
+        var msg = "\n" + Module.Translation.CommandList;
 
-        foreach (var command in _commandService.Scp079Commands.Handler.Commands)
+        foreach (var command in CommandService.Scp079Commands.Handler.Commands)
         {
             msg += $"\n{command.Meta.CommandName} - {command.Meta.Description}";
         }

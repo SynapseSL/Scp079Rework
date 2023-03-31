@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Neuron.Core.Meta;
+using PlayerRoles;
 using Syml;
 using Synapse3.SynapseModule.Config;
 using Synapse3.SynapseModule.Map.Rooms;
@@ -36,7 +37,7 @@ public class Scp079RobotsConfig : IDocumentSection
                     Ammo9 = 30
                 }
             },
-            RoleType = RoleType.FacilityGuard,
+            RoleType = RoleTypeId.FacilityGuard,
             Name = "Facility Guard Unit"
         },
         new RobotConfiguration()
@@ -58,7 +59,7 @@ public class Scp079RobotsConfig : IDocumentSection
                     Ammo9 = 30
                 }
             },
-            RoleType = RoleType.ClassD,
+            RoleType = RoleTypeId.ClassD,
             Name = "Class D Unit"
         },
         new RobotConfiguration()
@@ -80,7 +81,7 @@ public class Scp079RobotsConfig : IDocumentSection
                     Ammo9 = 30
                 }
             },
-            RoleType = RoleType.Scientist,
+            RoleType = RoleTypeId.Scientist,
             Name = "Scientist Unit"
         }
     };
@@ -92,7 +93,7 @@ public class Scp079RobotsConfig : IDocumentSection
 
         public SerializedPlayerInventory Inventory { get; set; } = new();
 
-        public RoleType RoleType { get; set; } = RoleType.ClassD;
+        public RoleTypeId RoleType { get; set; } = RoleTypeId.ClassD;
 
         public int Health { get; set; } = 50;
 

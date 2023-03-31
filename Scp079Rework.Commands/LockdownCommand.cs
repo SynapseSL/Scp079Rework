@@ -4,35 +4,37 @@ using MEC;
 using Neuron.Core.Meta;
 using Neuron.Modules.Commands;
 using Neuron.Modules.Commands.Command;
+using Ninject;
 using Synapse3.SynapseModule.Enums;
 using Synapse3.SynapseModule.Map;
 using Synapse3.SynapseModule.Map.Objects;
+using Synapse3.SynapseModule.Player;
+using UnityEngine;
 
 namespace Scp079Rework.Commands;
 
 [Automatic]
-[Scp079Command(
+[Scp079CommandKeyBind(
     CommandName = "Lockdown",
     Aliases = new string[] {  },
     Description = "Locks the entire Facility",
     Cooldown = 120f,
     EnergyUsage = 110,
-    ExperienceGain = 30f,
-    RequiredLevel = 4
+    ExperienceGain = 5,
+    RequiredLevel = 4,
+    DefaultKey = KeyCode.Keypad6
 )]
-public class LockdownCommand : Scp079Command
+public class LockdownCommand : Scp079CommandKeyBind
 {
-    private readonly Scp079Commands _plugin;
-    private readonly MapService _map;
-    private readonly CassieService _cassie;
-
-    public LockdownCommand(Scp079Commands plugin, MapService map, CassieService cassie)
-    {
-        _plugin = plugin;
-        _map = map;
-        _cassie = cassie;
-    }
+    [Inject]
+    public Scp079Commands Plugin { get; set; }
     
+    [Inject]
+    public MapService Map { get; set; }
+    
+    [Inject]
+    public CassieService Cassie { get; set; }
+
     public bool OnLockDown { get; private set; }
     
     public override void ExecuteCommand(Scp079Context context, ref CommandResult result)
@@ -40,13 +42,12 @@ public class LockdownCommand : Scp079Command
         if (OnLockDown)
         {
             result.StatusCode = CommandStatusCode.Error;
-            result.Response = _plugin.Translation.Get(context.Scp079).LockdownStillActive;
+            result.Response = Plugin.Translation.Get(context.Scp079).LockdownStillActive;
             return;
         }
 
         Timing.RunCoroutine(LockDown());
-
-        result.Response = _plugin.Translation.Get(context.Scp079).Lockdown;
+        result.Response = Plugin.Translation.Get(context.Scp079).Lockdown;
     }
 
     public IEnumerator<float> LockDown()
@@ -54,17 +55,17 @@ public class LockdownCommand : Scp079Command
         OnLockDown = true;
         var lockedDoors = new List<SynapseDoor>();
 
-        _cassie.Announce(_plugin.Config.LockdownCassie, CassieSettings.Noise, CassieSettings.Glitched,
+        Cassie.Announce(Plugin.Config.LockdownCassie, CassieSettings.Noise, CassieSettings.Glitched,
             CassieSettings.DisplayText);
         
-        foreach (var door in _map.SynapseDoors)
+        foreach (var door in Map.SynapseDoors)
         {
             if(door.Locked) continue;
             door.LockWithReason(DoorLockReason.Lockdown079);
             lockedDoors.Add(door);
         }
         
-        yield return Timing.WaitForSeconds(_plugin.Config.LockdownDuration);
+        yield return Timing.WaitForSeconds(Plugin.Config.LockdownDuration);
 
         foreach (var door in lockedDoors)
         {
@@ -72,5 +73,12 @@ public class LockdownCommand : Scp079Command
         }
 
         OnLockDown = false;
+    }
+
+    public override bool ExecuteBind(SynapsePlayer scp079)
+    {
+        if (OnLockDown) return false;
+        Timing.RunCoroutine(LockDown());
+        return true;
     }
 }

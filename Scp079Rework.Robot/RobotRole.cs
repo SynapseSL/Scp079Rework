@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Neuron.Core.Logging;
 using Neuron.Core.Meta;
+using PlayerRoles;
 using Synapse3.SynapseModule;
 using Synapse3.SynapseModule.Enums;
 using Synapse3.SynapseModule.Map;
@@ -12,7 +13,7 @@ namespace Scp079Rework.Robot;
 [Role(
     Name = "SCP-079 Robot",
     Id = 79,
-    TeamId = (uint)Team.SCP
+    TeamId = (uint)Team.SCPs
 )]
 public class RobotRole : SynapseRole
 {
@@ -29,19 +30,19 @@ public class RobotRole : SynapseRole
         _nuke = nuke;
     }
 
-    public override void SpawnPlayer(bool spawnLite)
+    public override void SpawnPlayer(ISynapseRole previousRole = null, bool spawnLite = false)
     {
         if(spawnLite) return;
 
         //So normally a SCP-079 Robot is always spawned lite but for the case someone is set manually is here a backup
-        Player.RoleType = RoleType.FacilityGuard;
+        Player.RoleType = RoleTypeId.FacilityGuard;
     }
 
-    public override void DeSpawn(DespawnReason reason)
+    public override void DeSpawn(DeSpawnReason reason)
     {
-        if (reason != DespawnReason.Death) return;
+        if (reason != DeSpawnReason.Death) return;
 
-        if (_heavyZone.Is079Recontained || _nuke.State == NukeState.Detonated)
+        if (_heavyZone.Is079Contained || _nuke.State == NukeState.Detonated)
         {
             var script = Player.GetComponent<Scp079Script>();
             if (script.Robots.Count > 0)
@@ -56,10 +57,10 @@ public class RobotRole : SynapseRole
         
         NeuronLogger.For<Synapse>().Warn("SET TO 079");
 
-        Player.RoleID = (int)RoleType.Scp079;
+        Player.RoleID = (uint)RoleTypeId.Scp079;
     }
 
-    public override List<uint> GetFriendsID() => _plugin.Config.Ff ? new List<uint> { } : new List<uint> { (uint)Team.SCP };
+    public override List<uint> GetFriendsID() => _plugin.Config.Ff ? new List<uint> { } : new List<uint> { (uint)Team.SCPs };
 
-    public override List<uint> GetEnemiesID() => new() { (uint)Team.RSC, (uint)Team.CDP, (uint)Team.MTF };
+    public override List<uint> GetEnemiesID() => new() { (uint)Team.Scientists, (uint)Team.ClassD, (uint)Team.FoundationForces };
 }

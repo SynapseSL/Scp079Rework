@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using PlayerRoles;
 using Synapse3.SynapseModule;
 using Synapse3.SynapseModule.Player;
 using UnityEngine;
@@ -43,7 +44,7 @@ public class Scp079Script : MonoBehaviour
         if (Player.RoleID != 79) return;
 
         Robots.Add(new Robot(Player, _currentTakenRobot));
-        Player.RoleID = (uint)RoleType.Scp079;
+        Player.RoleID = (uint)RoleTypeId.Scp079;
     }
 
     private void Awake()

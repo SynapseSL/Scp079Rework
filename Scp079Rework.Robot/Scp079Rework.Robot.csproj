@@ -35,11 +35,14 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="Assembly-CSharp">
-          <HintPath>..\..\..\..\Synapse-synapse3\Synapse3.SynapseModule\bin\Debug\net472\Assembly-CSharp-Publicized.dll</HintPath>
+        <Reference Include="0Harmony, Version=2.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\HarmonyX.2.10.0\lib\net45\0Harmony.dll</HintPath>
         </Reference>
-        <Reference Include="Assembly-CSharp-firstpass">
-          <HintPath>..\..\..\..\Synapse-synapse3\Synapse3.SynapseModule\bin\Debug\net472\Assembly-CSharp-firstpass.dll</HintPath>
+        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\SynapseSL.3.0.0-pre1.1\lib\net48\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\SynapseSL.3.0.0-pre1.1\lib\net48\Assembly-CSharp-firstpass.dll</HintPath>
         </Reference>
         <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
           <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -62,8 +65,26 @@
         <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
           <HintPath>..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
         </Reference>
-        <Reference Include="Mirror">
-          <HintPath>..\..\..\..\Synapse-synapse3\Synapse3.SynapseModule\bin\Debug\net472\Mirror_publicized.dll</HintPath>
+        <Reference Include="Mirror, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\SynapseSL.3.0.0-pre1.1\lib\net48\Mirror.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Mdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Pdb, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil.Rocks, Version=0.11.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+          <HintPath>..\packages\Mono.Cecil.0.11.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.RuntimeDetour, Version=22.3.23.4, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\MonoMod.RuntimeDetour.22.3.23.4\lib\net452\MonoMod.RuntimeDetour.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.Utils, Version=22.3.23.4, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\MonoMod.Utils.22.3.23.4\lib\net452\MonoMod.Utils.dll</HintPath>
         </Reference>
         <Reference Include="mscorlib" />
         <Reference Include="Neuron.Core, Version=1.0.0.5, Culture=neutral, processorArchitecture=Amd64">
@@ -75,14 +96,17 @@
         <Reference Include="Neuron.Modules.Configs, Version=1.0.0.5, Culture=neutral, processorArchitecture=Amd64">
           <HintPath>..\packages\NeuronModding.Modules.Configs.1.0.0.5\lib\netstandard2.0\Neuron.Modules.Configs.dll</HintPath>
         </Reference>
+        <Reference Include="Neuron.Modules.Patcher, Version=1.0.0.5, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\NeuronModding.Modules.Patcher.1.0.0.5\lib\netstandard2.0\Neuron.Modules.Patcher.dll</HintPath>
+        </Reference>
         <Reference Include="Ninject, Version=3.3.6.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
           <HintPath>..\packages\Ninject.3.3.6\lib\net45\Ninject.dll</HintPath>
         </Reference>
         <Reference Include="SYML, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\packages\SYML.1.0.2\lib\netstandard2.0\SYML.dll</HintPath>
         </Reference>
-        <Reference Include="Synapse3.SynapseModule">
-          <HintPath>..\..\..\..\Synapse-synapse3\Synapse3.SynapseModule\bin\Debug\net472\Synapse3.SynapseModule.dll</HintPath>
+        <Reference Include="Synapse3.SynapseModule, Version=3.0.0.0, Culture=neutral, processorArchitecture=Amd64">
+          <HintPath>..\packages\SynapseSL.3.0.0-pre1.1\lib\net48\Synapse3.SynapseModule.dll</HintPath>
         </Reference>
         <Reference Include="System" />
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -105,8 +129,14 @@
           <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
         </Reference>
         <Reference Include="System.Xml" />
-        <Reference Include="UnityEngine.CoreModule">
-          <HintPath>..\..\..\..\Synapse-synapse3\Synapse3.SynapseModule\bin\Debug\net472\UnityEngine.CoreModule.dll</HintPath>
+        <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\SynapseSL.3.0.0-pre1.1\lib\net48\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\SynapseSL.3.0.0-pre1.1\lib\net48\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\packages\SynapseSL.3.0.0-pre1.1\lib\net48\UnityEngine.PhysicsModule.dll</HintPath>
         </Reference>
         <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
           <HintPath>..\packages\YamlDotNet.11.2.1\lib\net45\YamlDotNet.dll</HintPath>

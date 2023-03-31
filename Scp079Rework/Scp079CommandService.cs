@@ -3,6 +3,7 @@ using Neuron.Core.Meta;
 using Neuron.Modules.Commands;
 using Neuron.Modules.Commands.Command;
 using Neuron.Modules.Commands.Event;
+using PlayerRoles;
 
 namespace Scp079Rework;
 
@@ -49,7 +50,7 @@ public class Scp079CommandService : Service
         var context = args.Context as Scp079Context;
         var isContextProper = context != null;
         
-        if (isContextProper && context.Scp079.RoleType != RoleType.Scp079)
+        if (isContextProper && context.Scp079.RoleType != RoleTypeId.Scp079)
         {
             return new CommandResult()
             {

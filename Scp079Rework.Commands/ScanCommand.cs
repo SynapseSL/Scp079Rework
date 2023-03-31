@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Neuron.Core.Meta;
+﻿using Neuron.Core.Meta;
 using Neuron.Modules.Commands;
+using Ninject;
 using Synapse3.SynapseModule.Player;
 
 namespace Scp079Rework.Commands;
@@ -12,24 +12,21 @@ namespace Scp079Rework.Commands;
     Description = "Scans the entire Facility for Targets",
     Cooldown = 60f,
     EnergyUsage = 50,
-    ExperienceGain = 10f,
+    ExperienceGain = 0,
     RequiredLevel = 4
 )]
 public class ScanCommand : Scp079Command
 {
-    private readonly Scp079Commands _plugin;
-    private readonly PlayerService _player;
-
-    public ScanCommand(Scp079Commands plugin, PlayerService player)
-    {
-        _plugin = plugin;
-        _player = player;
-    }
+    [Inject]
+    public Scp079Commands Plugin { get; set; }
     
+    [Inject]
+    public PlayerService Player { get; set; }
+
     public override void ExecuteCommand(Scp079Context context, ref CommandResult result)
     {
-        var msg = "\n" + _plugin.Translation.Get(context.Scp079).Scan;
-        foreach (var player in _player.Players)
+        var msg = "\n" + Plugin.Translation.Get(context.Scp079).Scan;
+        foreach (var player in Player.Players)
         {
             msg += $"\n{player.RoleType} - {player.Room.Name}";
         }

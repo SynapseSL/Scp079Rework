@@ -12,11 +12,8 @@ namespace Scp079Rework.Commands;
 )]
 public class Scp079Commands : ReloadablePlugin<Scp079CommandConfigs, Scp079CommandTranslation>
 {
-    public EventHandlers EventHandlers { get; set; }
-
     public override void EnablePlugin()
     {
-        EventHandlers = Synapse.GetAndBind<EventHandlers>();
         Logger.Info("Enabled SCP-079 Commands");
     }
 }
