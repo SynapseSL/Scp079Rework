@@ -23,7 +23,7 @@ public class Scp079RobotsConfig : IDocumentSection
             SpawnLocation = new RoomPoint()
             {
                 roomName = "Scp079",
-                position = new SerializedVector3(-1f, -5.87f, -5.95f),
+                position = new SerializedVector3(-1f, -4f, -5.95f),
                 rotation = new SerializedVector3(0f, 180f, 0f)
             },
             Inventory = new SerializedPlayerInventory()
@@ -45,7 +45,7 @@ public class Scp079RobotsConfig : IDocumentSection
             SpawnLocation = new RoomPoint()
             {
                 roomName = "Scp079",
-                position = new SerializedVector3(-2f, -5.87f, -5.95f),
+                position = new SerializedVector3(-2f, -4f, -5.95f),
                 rotation = new SerializedVector3(0f, 180f, 0f)
             },
             Inventory = new SerializedPlayerInventory()
@@ -67,7 +67,7 @@ public class Scp079RobotsConfig : IDocumentSection
             SpawnLocation = new RoomPoint()
             {
                 roomName = "Scp079",
-                position = new SerializedVector3(-3f, -5.87f, -5.95f),
+                position = new SerializedVector3(-3f, -4f, -5.95f),
                 rotation = new SerializedVector3(0f, 180f, 0f)
             },
             Inventory = new SerializedPlayerInventory()
