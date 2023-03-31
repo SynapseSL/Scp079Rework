@@ -19,7 +19,7 @@ public class Scp079CommandConfigs : IDocumentSection
     
     public bool AllowInstantExplode { get; set; } = true;
 
-    public string OverchargeCassie { get; set; } = "Warning , all Facility power return to Heavy Zone in 3 . 2 . 1";
+    public string OverchargeCassie { get; set; } = "Warning , all Facility power will return to Heavy Zone in 3 . 2 . 1";
 
     public float OverchargeDelay { get; set; } = 10.5f;
 

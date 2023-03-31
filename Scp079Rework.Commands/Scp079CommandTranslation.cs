@@ -6,11 +6,6 @@ namespace Scp079Rework.Commands;
 [Automatic]
 public class Scp079CommandTranslation : Translations<Scp079CommandTranslation>
 {
-    public string InvalidNumber { get; set; } = "The number you entered is invalid or negative please use another";
-    public string MtfAnnouncement { get; set; } = "MTF Announcement was send";
-
-    public string Blackout { get; set; } = "The Facility is now in Blackout for 10 seconds";
-
     public string LockdownStillActive { get; set; } = "The previous Lockdown is still active.";
 
     public string Lockdown { get; set; } = "Lockdown started";
